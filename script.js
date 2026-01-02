@@ -36,7 +36,7 @@ function addOrUpdateNote() {
     date: Date.now(),
     description: descriptionInput.value,
     deleted: false,
-    deletedAt: Date.now(),
+    deletedAt: null,
   };
 
   if (dataArrIndex === -1) {
@@ -151,14 +151,23 @@ function bigNote(note) {
       </footer>
     `;
   } else {
+    const now = Date.now();
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+    const remainingTimeMs = note.deletedAt + sevenDays - now;
+    const daysLeft = Math.ceil(remainingTimeMs / (1000 * 60 * 60 * 24));
+
     fullNote.innerHTML = ` <div id="${note.id}">
       <p class="title">${note.title}</p>
       <p class="description">${note.description}</p>
       </div>
       <footer class="footer">
-      <p>It will be deleted in: ${note.deletedAt}</p>
+      <p>It will be deleted in: ${
+        daysLeft > 0 ? daysLeft + " day(s)" : "less than a day"
+      }</p>
+      <div>
       <button onClick="restoreNote(this)" class="btn">Restore</button>
       <button onClick="deleteNote(this)" class="btn">Delete</button>
+      </div>
       </footer>
     `;
   }
@@ -174,10 +183,10 @@ function restoreNote(buttonEl) {
 }
 
 function sevenDaysRemoveNote() {
-  const ahora = new Date();
-  const sieteDias = 7 * 24 * 60 * 60 * 1000;
+  const now = new Date();
+  const sevenDays = 7 * 24 * 60 * 60 * 1000;
   notes = notes.filter(
-    (note) => !(note.deleted && ahora - note.deletedAt >= sieteDias)
+    (note) => !(note.deleted && now - note.deletedAt >= sevenDays)
   );
   localStorage.setItem("data", JSON.stringify(notes));
 }
