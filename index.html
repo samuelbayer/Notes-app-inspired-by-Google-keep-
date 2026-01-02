@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes app</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="main-container">
+      <section id="notes-app">
+        <header id="header">
+          <div id="icon" class="icon">
+            <img src="note-svgrepo-com.svg" alt="icon" class="icon-img" />
+            <p>Note App</p>
+          </div>
+          <div id="searcher-container">
+            <input id="searcher-input" type="search" class="buscador" />
+          </div>
+          <div id="crear-nota">
+            <button id="create-note-button">Crear nota</button>
+          </div>
+        </header>
+        <section id="notes-section">
+          <nav class="sidebar">
+            <h3>Menú</h3>
+            <a id="note-btn" href="#">Notas <span id="notes-number"></span></a>
+            <a id="bin-btn" href="#"
+              >Papelera <span id="deleted-number"></span
+            ></a>
+          </nav>
+          <div class="overlay hidden">
+            <div id="create-note-popup" class="popup">
+              <div id="note-form-header">
+                <button id="close-note-form-btn">X</button>
+              </div>
+              <input type="text" id="title" class="input" placeholder="Title" />
+              <textarea
+                id="description"
+                class="input"
+                placeholder="Note"
+                rows="20"
+              ></textarea>
+              <button id="create-note-form-button" type="submit">
+                Crear nota
+              </button>
+            </div>
+          </div>
+          <section id="notes"></section>
+          <div id="full-note-popup" class="overlay hidden">
+            <div id="full-note" class="note"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
